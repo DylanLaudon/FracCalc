@@ -3,25 +3,29 @@ import java.util.Scanner;
 
 public class FracCalc {
 
-    public static void main(String[] args) 
+    public static void main(String[] args)
     {
         // TODO: Read the input from the user and call produceAnswer with an equation
         Scanner input = new Scanner(System.in);
+
         System.out.println("Input your first fraction: ");
-        Scanner frac1 = input.nextLine();
+        String frac1 = input.nextLine();
         System.out.println("Input your second fraction: ");
-        Scanner frac2 = input.nextLine();
+        String frac2 = input.nextLine();
 
         Scanner work = new Scanner(frac1);
         work.useDelimiter("/");
         int numerator1 = work.nextInt();
         int denominator1 = work.nextInt();
-        Scanner work = Scanner(frac2);
-        work.useDelimiter("/");
-        int numerator2 = work.nextInt();
-        int denominator2 = work.nextInt();
+        Fraction objfrac1 = new Fraction(numerator1, denominator1);
 
-        FracCalc.produceAnswer;
+        Scanner workv2 = new Scanner(frac2);
+        workv2.useDelimiter("/");
+        int numerator2 = workv2.nextInt();
+        int denominator2 = workv2.nextInt();
+        Fraction objfrac2 = new Fraction(numerator2, denominator2);
+
+        System.out.println(FracCalc.produceAnswer);
     }
     
     // ** IMPORTANT ** DO NOT DELETE THIS FUNCTION.  This function will be used to test your code
@@ -41,5 +45,5 @@ public class FracCalc {
     }
 
     // TODO: Fill in the space below with any helper methods that you think you will need
-    
+
 }
