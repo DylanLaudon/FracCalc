@@ -39,11 +39,10 @@ public class FracCalc {
     public static String produceAnswer(String input)
     { 
         // TODO: Implement this function to produce the solution to the input
-        int newNum = (numerator1 * denominator2) + (numerator2 * denominator1);
-        int newDen = (denominator1 * denominator2);
-        return newNum + " / " + newDen;
+
     }
 
     // TODO: Fill in the space below with any helper methods that you think you will need
 
+}
 }
