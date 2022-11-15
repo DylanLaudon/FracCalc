@@ -39,10 +39,11 @@ public class FracCalc {
     public static String produceAnswer(String input)
     { 
         // TODO: Implement this function to produce the solution to the input
-
+        int newNum = (objfrac1.getNumerator() * objfrac2.getDenominator()) + (objfrac2.getNumerator() * objfrac1.getDenominator());
+        int newDen = (objfrac1.getDenominator() * objfrac2.getDenominator());
+        return newNum + " / " + newDen;
     }
 
     // TODO: Fill in the space below with any helper methods that you think you will need
 
-}
 }
