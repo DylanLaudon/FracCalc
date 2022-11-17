@@ -1,17 +1,17 @@
 package src;
 
 public class Fraction {
-    private int numerator;
-    private int denominator;
+    private double numerator;
+    private double denominator;
 
-    public Fraction(int numerator, int denominator) {
+    public Fraction(double numerator, double denominator) {
         this.numerator = numerator;
         this.denominator = denominator;
     }
-    public int getNumerator() {
+    public double getNumerator() {
         return numerator;
     }
-    public int getDenominator() {
+    public double getDenominator() {
         return denominator;
     }
 }

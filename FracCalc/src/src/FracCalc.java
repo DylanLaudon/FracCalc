@@ -5,7 +5,10 @@ public class FracCalc {
 
     public static void main(String[] args) {
         // TODO: Read the input from the user and call produceAnswer with an equation
-        System.out.println(FracCalc.produceAnswer());
+        Scanner exput = new Scanner(System.in);
+        System.out.println("Input fraction equation: ");
+        String frac = exput.nextLine();
+        System.out.println(FracCalc.produceAnswer(frac));
     }
 
     // ** IMPORTANT ** DO NOT DELETE THIS FUNCTION.  This function will be used to test your code
@@ -16,30 +19,23 @@ public class FracCalc {
     //        
     // The function should return the result of the fraction after it has been calculated
     //      e.g. return ==> "1_1/4"
-    public static String produceAnswer(String input) {
-        Scanner input = new Scanner(System.in);
-
-        System.out.println("Input your first fraction: ");
-        String frac1 = input.nextLine();
-        System.out.println("Input your second fraction: ");
-        String frac2 = input.nextLine();
-
-        Scanner work = new Scanner(frac1);
+    public static String produceAnswer(String frac) {
+        /*
+        The delimiter splits the string into numerator and denominator variables
+         */
+        Scanner work = new Scanner(frac);
         work.useDelimiter("/");
-        int numerator1 = work.nextInt();
-        int denominator1 = work.nextInt();
+        double numerator1 = work.nextInt();
+        double denominator1 = work.nextInt();
         Fraction objfrac1 = new Fraction(numerator1, denominator1);
 
-        Scanner workv2 = new Scanner(frac2);
-        workv2.useDelimiter("/");
-        int numerator2 = workv2.nextInt();
-        int denominator2 = workv2.nextInt();
+        double numerator2 = work.nextInt();
+        double denominator2 = work.nextInt();
         Fraction objfrac2 = new Fraction(numerator2, denominator2);
 
-
-            int newNum = (objfrac1.getNumerator() * objfrac2.getDenominator()) + (objfrac2.getNumerator() * objfrac1.getDenominator());
-            int newDen = (objfrac1.getDenominator() * objfrac2.getDenominator());
-            return newNum + " / " + newDen;
+            double newNum = (numerator1 * denominator2) + (numerator2 * denominator1);
+            double newDen = (denominator1 * denominator2);
+            return newNum + "/" + newDen;
 
         // TODO: Fill in the space below with any helper methods that you think you will need
     }
