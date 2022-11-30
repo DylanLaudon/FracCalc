@@ -28,6 +28,14 @@ public class FracCalc {
         String sign = workv2.next();
         String fullFraction2 = workv2.next();
 
+        if(fullFraction1.contains("-") && fullFraction2.contains("-")) {
+            // does nothing
+        } else if((sign == "+") && fullFraction1.contains("-") || fullFraction2.contains("-")){
+            sign = "-";
+        } else ((sign == "-") && fullFraction1.contains("-") || fullFraction2.contains("-")){
+            sign = "+";
+        }
+
         int wholeNum1 = 0;
         String fraction1;
         if(fullFraction1.contains("_")) {
@@ -50,17 +58,36 @@ public class FracCalc {
             fraction2 = fullFraction2;
         }
 
-        Scanner work = new Scanner(fraction1);
-        work.useDelimiter("/");
-        int numerator1 = work.nextInt();
-        int denominator1 = work.nextInt();
-        Fraction objfrac1 = new Fraction(numerator1, denominator1);
 
-        Scanner workv3 = new Scanner(fraction2);
-        workv3.useDelimiter("/");
-        int numerator2 = workv3.nextInt();
-        int denominator2 = workv3.nextInt();
-        Fraction objfrac2 = new Fraction(numerator2, denominator2);
+        int numerator1 = 0;
+        int denominator1 = 0;
+        //Takes in just whole numbers
+        if(!fraction1.contains("/")){
+            wholeNum1 = Integer.parseInt(fraction1);
+            numerator1 = 1;
+            denominator1 = 1;
+        } else {
+            Scanner work = new Scanner(fraction1);
+            work.useDelimiter("/");
+            numerator1 = work.nextInt();
+            denominator1 = work.nextInt();
+            Fraction objfrac1 = new Fraction(numerator1, denominator1);
+        }
+
+        int numerator2 = 0;
+        int denominator2 = 0;
+        if(!fraction2.contains("/")){
+            wholeNum2 = Integer.parseInt(fraction2);
+            numerator2 = 1;
+            denominator2 = 1;
+        } else {
+            Scanner workv3 = new Scanner(fraction2);
+            workv3.useDelimiter("/");
+            numerator2 = workv3.nextInt();
+            denominator2 = workv3.nextInt();
+            Fraction objfrac2 = new Fraction(numerator2, denominator2);
+        }
+
 
         int newNum = 0;
         int newDen = 0;
