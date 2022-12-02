@@ -20,7 +20,7 @@ public class FracCalc {
     // The function should return the result of the fraction after it has been calculated
     //      e.g. return ==> "1_1/4"
     public static String produceAnswer(String frac) {
-        //The delimiter splits the string into numerator and denominator variables
+        //The delimiter splits the string into two fractions
         Scanner workv2 = new Scanner(frac);
         workv2.useDelimiter(" ");
         String fullFraction1 = workv2.next();
@@ -28,13 +28,6 @@ public class FracCalc {
         String sign = workv2.next();
         String fullFraction2 = workv2.next();
 
-        if(fullFraction1.contains("-") && fullFraction2.contains("-")) {
-            // does nothing
-        } else if((sign == "+") && fullFraction1.contains("-") || fullFraction2.contains("-")){
-            sign = "-";
-        } else ((sign == "-") && fullFraction1.contains("-") || fullFraction2.contains("-")){
-            sign = "+";
-        }
 
         int wholeNum1 = 0;
         String fraction1;
@@ -58,7 +51,7 @@ public class FracCalc {
             fraction2 = fullFraction2;
         }
 
-
+        int impWhole1 = 0;
         int numerator1 = 0;
         int denominator1 = 0;
         //Takes in just whole numbers
@@ -71,9 +64,10 @@ public class FracCalc {
             work.useDelimiter("/");
             numerator1 = work.nextInt();
             denominator1 = work.nextInt();
-            Fraction objfrac1 = new Fraction(numerator1, denominator1);
+            impWhole1 = denominator1 * wholeNum1;
         }
 
+        int impWhole2 = 0;
         int numerator2 = 0;
         int denominator2 = 0;
         if(!fraction2.contains("/")){
@@ -85,13 +79,22 @@ public class FracCalc {
             workv3.useDelimiter("/");
             numerator2 = workv3.nextInt();
             denominator2 = workv3.nextInt();
-            Fraction objfrac2 = new Fraction(numerator2, denominator2);
+            impWhole2 = denominator2 * wholeNum2;
         }
 
+        //Creates improper numerator
+        if (impWhole1 > 0){
+            numerator1 = impWhole1 + numerator1;
+            wholeNum1 = 0;
+        }
+        if (impWhole2 > 0){
+            numerator2 = impWhole2 + numerator2;
+            wholeNum2 = 0;
+        }
 
         int newNum = 0;
         int newDen = 0;
-        //Does the addition
+        //Does the addition, else does the subtraction
         if (sign.equals("+")) {
             newNum = (numerator1 * denominator2) + (numerator2 * denominator1);
             newDen = (denominator1 * denominator2);
@@ -101,12 +104,18 @@ public class FracCalc {
         }
 
 
-            int fWholeNum = wholeNum1 + wholeNum2;
-            int reducedNum = 0;
-            if(newNum > newDen) {
+
+        /*if (sign.equals("+")) {
+            fWholeNum = wholeNum1 + wholeNum2;
+        } else if (sign.equals("-")) {
+            fWholeNum = wholeNum1 - wholeNum2;
+        }
+        */
+        int fWholeNum = 0;
+        int reducedNum = 0;
+            if(Math.abs(newNum) > newDen) {
                 reducedNum = newNum % newDen;
-                int addWhole = newNum / newDen;
-                fWholeNum += addWhole;
+                fWholeNum = newNum / newDen;
             }
             if(fWholeNum > 0) {
                 return fWholeNum + "_" + reducedNum + "/" + newDen;
