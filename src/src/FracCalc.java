@@ -57,14 +57,15 @@ public class FracCalc {
         //Takes in just whole numbers
         if(!fraction1.contains("/")){
             wholeNum1 = Integer.parseInt(fraction1);
-            numerator1 = 1;
-            denominator1 = 1;
+            numerator1 = 0;
+            denominator1 = 0;
         } else {
             Scanner work = new Scanner(fraction1);
             work.useDelimiter("/");
             numerator1 = work.nextInt();
             denominator1 = work.nextInt();
             impWhole1 = denominator1 * wholeNum1;
+            wholeNum1= 0;
         }
 
         int impWhole2 = 0;
@@ -72,24 +73,25 @@ public class FracCalc {
         int denominator2 = 0;
         if(!fraction2.contains("/")){
             wholeNum2 = Integer.parseInt(fraction2);
-            numerator2 = 1;
-            denominator2 = 1;
+            numerator2 = 0;
+            denominator2 = 0;
         } else {
             Scanner workv3 = new Scanner(fraction2);
             workv3.useDelimiter("/");
             numerator2 = workv3.nextInt();
             denominator2 = workv3.nextInt();
             impWhole2 = denominator2 * wholeNum2;
-        }
-
-        //Creates improper numerator
-        if (impWhole1 > 0){
-            numerator1 = impWhole1 + numerator1;
-            wholeNum1 = 0;
-        }
-        if (impWhole2 > 0){
-            numerator2 = impWhole2 + numerator2;
             wholeNum2 = 0;
+        }
+        if(impWhole1 == 0) {
+            numerator1 = numerator1 * denominator1;
+        } else {
+            numerator1 = (numerator1 * denominator1) + impWhole1;
+        }
+        if (impWhole2 == 0) {
+            numerator2 = numerator2 * denominator2;
+        } else {
+            numerator2 = (numerator2 * denominator2) + impWhole2;
         }
 
         int newNum = 0;
@@ -98,27 +100,33 @@ public class FracCalc {
         if (sign.equals("+")) {
             newNum = (numerator1 * denominator2) + (numerator2 * denominator1);
             newDen = (denominator1 * denominator2);
+        } else if (denominator1 == 0) {
+            newNum = numerator2;
+            newDen = denominator2;
+        } else if (denominator2 == 0) {
+            newNum = numerator1;
+            newDen = denominator1;
         } else  {
             newNum = (numerator1 * denominator2) - (numerator2 * denominator1);
             newDen = (denominator1 * denominator2);
         }
 
-
-
-        /*if (sign.equals("+")) {
+        int fWholeNum = 0;
+        if (sign == "+") {
             fWholeNum = wholeNum1 + wholeNum2;
-        } else if (sign.equals("-")) {
+        } else {
             fWholeNum = wholeNum1 - wholeNum2;
         }
-        */
-        int fWholeNum = 0;
-        int reducedNum = 0;
             if(Math.abs(newNum) > newDen) {
-                reducedNum = newNum % newDen;
                 fWholeNum = newNum / newDen;
+                newNum = newNum % newDen;
             }
-            if(fWholeNum > 0) {
-                return fWholeNum + "_" + reducedNum + "/" + newDen;
+            //Removes the negative in front of the fraction if both are negative
+        if(fWholeNum < 0 && newNum < 0){
+            newNum = Math.abs(newNum);
+        }
+            if(fWholeNum > 0 || fWholeNum < 0) {
+                return fWholeNum + "_" + newNum + "/" + newDen;
             }
             else {
                 return newNum + "/" + newDen;
