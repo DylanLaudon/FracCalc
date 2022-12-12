@@ -83,15 +83,11 @@ public class FracCalc {
             impWhole2 = denominator2 * wholeNum2;
             wholeNum2 = 0;
         }
-        if(impWhole1 == 0) {
-            numerator1 = numerator1 * denominator1;
-        } else {
-            numerator1 = (numerator1 * denominator1) + impWhole1;
+        if(impWhole1 != 0) {
+            numerator1 = numerator1 + impWhole1;
         }
-        if (impWhole2 == 0) {
-            numerator2 = numerator2 * denominator2;
-        } else {
-            numerator2 = (numerator2 * denominator2) + impWhole2;
+        if(impWhole2 != 0) {
+            numerator2 = numerator2 + impWhole2;
         }
 
         int newNum = 0;
@@ -112,19 +108,34 @@ public class FracCalc {
         }
 
         int fWholeNum = 0;
-        if (sign == "+") {
+        //If there is just a whole number and no fraction, it is added to the whole number whole
+        if (sign.equals("+")) {
             fWholeNum = wholeNum1 + wholeNum2;
         } else {
             fWholeNum = wholeNum1 - wholeNum2;
         }
-            if(Math.abs(newNum) > newDen) {
-                fWholeNum = newNum / newDen;
+            if(Math.abs(newNum) > newDen && sign.equals("+")) {
+                fWholeNum = fWholeNum + (newNum / newDen);
                 newNum = newNum % newDen;
-            }
+            } else if (Math.abs(newNum) > newDen && sign.equals("-")){
+            fWholeNum = fWholeNum - (newNum / newDen);
+            newNum = newNum % newDen;
+        }
             //Removes the negative in front of the fraction if both are negative
         if(fWholeNum < 0 && newNum < 0){
             newNum = Math.abs(newNum);
         }
+
+        //reduces the fraction
+        int counter = newDen;
+        while(counter > 0){
+         if(newNum % counter == 0  && newDen % counter == 0) {
+            newNum = newNum / counter;
+            newDen = newDen / counter;
+         }
+            counter --;
+        }
+
             if(fWholeNum > 0 || fWholeNum < 0) {
                 return fWholeNum + "_" + newNum + "/" + newDen;
             }
