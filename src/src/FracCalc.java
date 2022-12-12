@@ -64,6 +64,10 @@ public class FracCalc {
             work.useDelimiter("/");
             numerator1 = work.nextInt();
             denominator1 = work.nextInt();
+
+            if(wholeNum1 < 0){
+                numerator1 = numerator1 *= -1;
+            }
             impWhole1 = denominator1 * wholeNum1;
             wholeNum1= 0;
         }
@@ -80,6 +84,10 @@ public class FracCalc {
             workv3.useDelimiter("/");
             numerator2 = workv3.nextInt();
             denominator2 = workv3.nextInt();
+
+            if(wholeNum2 < 0){
+                numerator2 = numerator2 *= -1;
+            }
             impWhole2 = denominator2 * wholeNum2;
             wholeNum2 = 0;
         }
@@ -93,18 +101,21 @@ public class FracCalc {
         int newNum = 0;
         int newDen = 0;
         //Does the addition, else does the subtraction
-        if (sign.equals("+")) {
-            newNum = (numerator1 * denominator2) + (numerator2 * denominator1);
-            newDen = (denominator1 * denominator2);
-        } else if (denominator1 == 0) {
+        if (denominator1 == 0) {
             newNum = numerator2;
             newDen = denominator2;
         } else if (denominator2 == 0) {
             newNum = numerator1;
             newDen = denominator1;
-        } else  {
+        } else if(sign.equals("+")) {
+            newNum = (numerator1 * denominator2) + (numerator2 * denominator1);
+            newDen = (denominator1 * denominator2);
+        }  else if (sign.equals("-")) {
             newNum = (numerator1 * denominator2) - (numerator2 * denominator1);
             newDen = (denominator1 * denominator2);
+        } else if (sign.equals("*")){
+            newNum = numerator1 * numerator2;
+            newDen = denominator1 * denominator2;
         }
 
         int fWholeNum = 0;
