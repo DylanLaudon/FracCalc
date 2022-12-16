@@ -21,6 +21,7 @@ public class FracCalc {
     //      e.g. return ==> "1_1/4"
     public static String produceAnswer(String frac) {
         //The delimiter splits the string into two fractions
+        boolean trip = false;
         Scanner workv2 = new Scanner(frac);
         workv2.useDelimiter(" ");
         String fullFraction1 = workv2.next();
@@ -68,6 +69,7 @@ public class FracCalc {
             }
             impWhole1 = denominator1 * wholeNum1;
             wholeNum1= 0;
+            trip = true;
         }
 
         int impWhole2 = 0;
@@ -121,18 +123,18 @@ public class FracCalc {
         } else if(sign.equals("-")){
             fWholeNum = wholeNum1 - wholeNum2;
         } else if (sign.equals("*")){
-            fWholeNum = wholeNum1 * wholeNum2;
+            if(wholeNum1 == 0 && !trip){
+                fWholeNum = wholeNum2;
+            } else if (wholeNum2 == 0){
+                fWholeNum = wholeNum1;
+            } else {
+                fWholeNum = wholeNum1 * wholeNum2;
+            }
         }
         else {
             fWholeNum = wholeNum1 / wholeNum2;
         }
-            if(Math.abs(newNum) > newDen && sign.equals("+")) {
-                fWholeNum = fWholeNum + (newNum / newDen);
-                newNum = newNum % newDen;
-            } else if (Math.abs(newNum) > newDen && sign.equals("-")){
-            fWholeNum = fWholeNum - (newNum / newDen);
-            newNum = newNum % newDen;
-        }
+
             //Removes the negative in front of the fraction if both are negative
         if(fWholeNum < 0 && newNum < 0){
             newNum = Math.abs(newNum);
