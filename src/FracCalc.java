@@ -57,8 +57,6 @@ public class FracCalc {
         //Takes in just whole numbers
         if(!fraction1.contains("/")){
             wholeNum1 = Integer.parseInt(fraction1);
-            numerator1 = 0;
-            denominator1 = 0;
         } else {
             Scanner work = new Scanner(fraction1);
             work.useDelimiter("/");
@@ -66,7 +64,7 @@ public class FracCalc {
             denominator1 = work.nextInt();
 
             if(wholeNum1 < 0){
-                numerator1 = numerator1 *= -1;
+                numerator1 *= -1;
             }
             impWhole1 = denominator1 * wholeNum1;
             wholeNum1= 0;
@@ -77,8 +75,6 @@ public class FracCalc {
         int denominator2 = 0;
         if(!fraction2.contains("/")){
             wholeNum2 = Integer.parseInt(fraction2);
-            numerator2 = 0;
-            denominator2 = 0;
         } else {
             Scanner workv3 = new Scanner(fraction2);
             workv3.useDelimiter("/");
@@ -119,11 +115,16 @@ public class FracCalc {
         }
 
         int fWholeNum = 0;
-        //If there is just a whole number and no fraction, it is added to the whole number whole
+        //If there is just a whole number and no fraction, it is added to the whole number
         if (sign.equals("+")) {
             fWholeNum = wholeNum1 + wholeNum2;
-        } else {
+        } else if(sign.equals("-")){
             fWholeNum = wholeNum1 - wholeNum2;
+        } else if (sign.equals("*")){
+            fWholeNum = wholeNum1 * wholeNum2;
+        }
+        else {
+            fWholeNum = wholeNum1 / wholeNum2;
         }
             if(Math.abs(newNum) > newDen && sign.equals("+")) {
                 fWholeNum = fWholeNum + (newNum / newDen);
@@ -147,10 +148,11 @@ public class FracCalc {
             counter --;
         }
 
-            if(fWholeNum > 0 || fWholeNum < 0) {
-                return fWholeNum + "_" + newNum + "/" + newDen;
-            }
-            else {
+        if (newNum == 0 && newDen == 0){
+            return fWholeNum + "";
+        } else if(fWholeNum > 0 || fWholeNum < 0) {
+            return fWholeNum + "_" + newNum + "/" + newDen;
+        } else {
                 return newNum + "/" + newDen;
             }
         // TODO: Fill in the space below with any helper methods that you think you will need
